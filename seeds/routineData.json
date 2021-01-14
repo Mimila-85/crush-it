@@ -1,0 +1,38 @@
+[
+    {
+        "name_routine": "Upper Body",
+        "user_id": 1,
+        "array_of_exercises": [
+            {
+                "name": "Pushups",
+                "sets": 3,
+                "reps": 10,
+                "weight": 50
+            },
+            {
+                "name": "Bench Press",
+                "sets": 3,
+                "reps": 10,
+                "weight": 50
+            }
+        ]
+    },
+    {
+        "name_routine": "Lower Body",
+        "user_id": 1,
+        "array_of_exercises": [
+            {
+                "name": "Squats",
+                "sets": 3,
+                "reps": 10,
+                "weight": 50
+            },
+            {
+                "name": "Lunges",
+                "sets": 3,
+                "reps": 10,
+                "weight": 50
+            }
+        ]
+    }
+]
