@@ -1,0 +1,45 @@
+<h2 class="routine text-center">{{name_routine}}</h2>
+<div class="row segment">
+  <div class="col-5">Exercises</div>
+  <div class="col-2">Sets</div>
+  <div class="col-2">Reps</div>
+  <div class="col-2">Weight</div>
+  <div class="col-1">Done?</div>
+</div>
+<br>
+{{#each array_of_exercises}}
+<form>
+  <div class="row segment workoutList">
+    <div class="col-5">
+      <div class="form-group">
+        <textarea class="form-control" id="name" rows="1">{{this.name}}</textarea>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <textarea class="form-control" id="sets" rows="1">{{this.sets}}</textarea>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <textarea class="form-control" id="reps" rows="1">{{this.reps}}</textarea>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <textarea class="form-control" id="weight" rows="1">{{this.weight}}</textarea>
+      </div>
+    </div>
+    <div class="col-1">
+      <button class="button btn rounded" id="saveEachBtn"><i class="fas fa-check"></i></button>
+    </div>
+  </div>
+</form>
+<br>
+{{/each}}
+<div class="col-3">
+  <button class="button btn rounded" id="updateBtn" updateId="{{id}}">Update Routine</i></button>
+</div>
+<div class="col-3">
+  <button class="button btn rounded" id="saveProgressBtn" saveId="{{id}}">Save Progress</button>
+</div>
