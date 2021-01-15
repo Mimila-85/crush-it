@@ -30,8 +30,6 @@ const updateWorkout = async (event) => {
     });
   });
 
-  console.log(array_of_exercises);
-
   const responseWorkout = await fetch(`/api/routine/${updateId}`, {
     method: "PUT",
     body: JSON.stringify(
@@ -53,21 +51,21 @@ const updateWorkout = async (event) => {
 
 const array_of_results = [];
 
-const progressArray = async (event) => {
-  event.preventDefault();
+const checkedBox = function () {
+  const thisId = $(this).attr("checkId");
+  console.log(thisId);
 
-  $("#saveEachBtn").css("background", "green");
-
-  const name = $("#name").val();
-  const sets = $("#sets").val();
-  const reps = $("#reps").val();
-  const weight = $("#weight").val();
-
-  array_of_results.push({
-    name: name,
-    sets: sets,
-    reps: reps,
-    weight: weight,
+  $(".workoutList").map((i, exercise) => {
+    const id = $(exercise).find("input.mycheckbox").attr("checkId");
+    console.log(id);
+    if (this.checked && thisId === id) {
+      array_of_results.push({
+        name: $(exercise).find("textarea.row-names").val(),
+        sets: $(exercise).find("textarea.row-sets").val(),
+        reps: $(exercise).find("textarea.row-reps").val(),
+        weight: $(exercise).find("textarea.row-weights").val(),
+      });
+    }
   });
   console.log(array_of_results);
 };
@@ -96,5 +94,5 @@ const saveProgress = async () => {
 
 $(document).on("click", "#goBtn", startWorkout);
 $(document).on("click", "#updateBtn", updateWorkout);
-$(document).on("click", ".saveEachBtn", progressArray);
+$(document).on("click", ".mycheckbox", checkedBox);
 $(document).on("click", "#saveProgressBtn", saveProgress);
