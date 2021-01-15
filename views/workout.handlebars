@@ -7,36 +7,37 @@
   <div class="col-1">Done?</div>
 </div>
 <br>
-{{#each array_of_exercises}}
 <form>
+  {{#each array_of_exercises}}
   <div class="row segment workoutList">
     <div class="col-5">
       <div class="form-group">
-        <textarea class="form-control" id="name" rows="1">{{this.name}}</textarea>
+        <textarea class="form-control row-names" rows="2">{{this.name}}</textarea>
       </div>
     </div>
     <div class="col-2">
       <div class="form-group">
-        <textarea class="form-control" id="sets" rows="1">{{this.sets}}</textarea>
+        <textarea class="form-control row-sets" rows="1">{{this.sets}}</textarea>
       </div>
     </div>
     <div class="col-2">
       <div class="form-group">
-        <textarea class="form-control" id="reps" rows="1">{{this.reps}}</textarea>
+        <textarea class="form-control row-reps" rows="1">{{this.reps}}</textarea>
       </div>
     </div>
     <div class="col-2">
       <div class="form-group">
-        <textarea class="form-control" id="weight" rows="1">{{this.weight}}</textarea>
+        <textarea class="form-control row-weights" rows="1">{{this.weight}}</textarea>
       </div>
     </div>
     <div class="col-1">
-      <button class="button btn rounded" id="saveEachBtn"><i class="fas fa-check"></i></button>
+      <button class="button btn rounded saveEachBtn"><i class="fas fa-check"></i></button>
     </div>
   </div>
-</form>
-<br>
+  <br>
 {{/each}}
+</form>
+
 <div class="col-3">
   <button class="button btn rounded" id="updateBtn" updateId="{{id}}">Update Routine</i></button>
 </div>

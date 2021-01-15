@@ -1,48 +1,3 @@
-// Function exerciseList on hold
-const exerciseList = async (event) => {
-  event.preventDefault();
-  const routine_id = $("#savedRoutine option:selected").val();
-  console.log(routine_id);
-  const response = await fetch(`/api/routine/${routine_id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    }
-  });
-
-  const routine = await response.json();
-  const { array_of_exercises } = routine;
-
-  array_of_exercises.forEach(exercise => {
-    const newRow =
-      `<div class="col-5">
-        <div class="form-group">
-          <textarea class="form-control" id="name" rows="1">${exercise.name}</textarea>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <textarea class="form-control" id="sets" rows="1">${exercise.sets}</textarea>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <textarea class="form-control" id="reps" rows="1">${exercise.reps}</textarea>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <textarea class="form-control" id="weight" rows="1">${exercise.weight}</textarea>
-        </div>
-      </div>
-      <div class="col-1">
-        <button class="button btn rounded" id="saveEachBtn"><i class="fas fa-check"></i></button>
-      </div>`;
-    console.log(newRow);
-    $(".workoutList").append(newRow);
-  });
-};
-
 const startWorkout = async (event) => {
   event.preventDefault();
 
@@ -65,17 +20,16 @@ const updateWorkout = async (event) => {
 
   const array_of_exercises = [];
 
-  const name = $("#name").val();
-  const sets = $("#sets").val();
-  const reps = $("#reps").val();
-  const weight = $("#weight").val();
-
-  array_of_exercises.push({
-    name: name,
-    sets: sets,
-    reps: reps,
-    weight: weight,
+  $(".workoutList").each((i, exercise) => {
+    console.log(exercise);
+    array_of_exercises.push({
+      name: $(exercise).find("textarea.row-names").val(),
+      sets: $(exercise).find("textarea.row-sets").val(),
+      reps: $(exercise).find("textarea.row-reps").val(),
+      weight: $(exercise).find("textarea.row-weights").val(),
+    });
   });
+
   console.log(array_of_exercises);
 
   const responseWorkout = await fetch(`/api/routine/${updateId}`, {
@@ -142,5 +96,5 @@ const saveProgress = async () => {
 
 $(document).on("click", "#goBtn", startWorkout);
 $(document).on("click", "#updateBtn", updateWorkout);
-$(document).on("click", "#saveEachBtn", progressArray);
+$(document).on("click", ".saveEachBtn", progressArray);
 $(document).on("click", "#saveProgressBtn", saveProgress);
