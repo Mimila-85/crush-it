@@ -51,16 +51,7 @@ router.get("/", async (req, res) => {
 // Use withAuth middleware to prevent access to route
 router.get("/:id", withAuth, async (req, res) => {
   try {
-    const routineData = await Routine.findByPk(req.params.id
-    //   , {
-    //   include: [
-    //     {
-    //       model: Exercise,
-    //       attributes: ["name"],
-    //     }
-    //   ]
-    // }
-    );
+    const routineData = await Routine.findByPk(req.params.id);
     const routine = routineData.get({ plain: true });
     res.json(routine);
     
@@ -79,9 +70,6 @@ router.put("/:id", async (req, res) => {
       {
         where: {
           id: req.params.id,
-          // array_of_exercises: {
-          //   name: req.params.name,
-          // }
         },
       }
     );
