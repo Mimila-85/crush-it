@@ -16,12 +16,11 @@ const updateWorkout = async (event) => {
   event.preventDefault();
 
   const updateId = $("#updateBtn").attr("updateId");
-  console.log(updateId);
 
   const array_of_exercises = [];
 
   $(".workoutList").each((i, exercise) => {
-    console.log(exercise);
+
     array_of_exercises.push({
       name: $(exercise).find("textarea.row-names").val(),
       sets: $(exercise).find("textarea.row-sets").val(),
@@ -53,11 +52,10 @@ const array_of_results = [];
 
 const checkedBox = function () {
   const thisId = $(this).attr("checkId");
-  console.log(thisId);
 
   $(".workoutList").map((i, exercise) => {
     const id = $(exercise).find("input.mycheckbox").attr("checkId");
-    console.log(id);
+
     if (this.checked && thisId === id) {
       array_of_results.push({
         name: $(exercise).find("textarea.row-names").val(),
@@ -67,15 +65,11 @@ const checkedBox = function () {
       });
     }
   });
-  console.log(array_of_results);
 };
 
 const saveProgress = async () => {
 
   const routine_id = $("#saveProgressBtn").attr("saveId");
-  console.log(routine_id);
-
-  console.log(array_of_results);
 
   const responseWorkout = await fetch("/api/workout", {
     method: "POST",
@@ -92,7 +86,23 @@ const saveProgress = async () => {
   }
 };
 
+const deleteRoutine = async () => {
+
+  const routine_id = $("#deleteBtn").attr("deleteId");
+
+  const response = await fetch(`/api/routine/${routine_id}`, {
+    method: "DELETE",
+  });
+
+  if (response.ok) {
+    document.location.replace("/dashboard");
+  } else {
+    alert("Failed to delete routine");
+  }
+};
+
 $(document).on("click", "#goBtn", startWorkout);
 $(document).on("click", "#updateBtn", updateWorkout);
 $(document).on("click", ".mycheckbox", checkedBox);
 $(document).on("click", "#saveProgressBtn", saveProgress);
+$(document).on("click", "#deleteBtn", deleteRoutine);
