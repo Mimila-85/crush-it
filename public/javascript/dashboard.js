@@ -8,27 +8,34 @@ async function fetchinguserdata() {
   });
 
   const { workouts } = await response.json();
-  console.log(workouts);
+  // console.log(workouts);
 
   const workoutData = {
     dates: [],
     totals: [],
   };
 
-  workouts.map((workout) => {
+  let rev = workouts.reverse();
+  const last_seven = rev.slice(0, 7);
+  const revert = last_seven.reverse();
+  // console.log(revert);
+
+  revert.map((workout) => {
     const array_of_results = workout.array_of_results;
-    console.log(array_of_results);
+    // console.log(array_of_results);
 
     const totalReps = array_of_results.reduce((total, results) => {
       return total + parseInt(results.sets) * parseInt(results.reps);
     }, 0);
 
-    console.log({ totalReps });
+    // console.log({ totalReps });
+
 
     workoutData.dates.push(new Date(workout.date).toLocaleDateString());
     workoutData.totals.push(totalReps);
+
   });
-  console.log({ workoutData });
+  // console.log({ workoutData });
 
   var ctx = document.getElementById("myChart").getContext("2d");
   var chart = new Chart(ctx, {
@@ -40,7 +47,7 @@ async function fetchinguserdata() {
       labels: workoutData.dates,
       datasets: [
         {
-          label: "Your reps per day",
+          label: "Total Reps",
           backgroundColor: "rgb(255, 99, 132)",
           borderColor: "rgb(255, 99, 132)",
           data: workoutData.totals,
@@ -51,6 +58,7 @@ async function fetchinguserdata() {
     // Configuration options go here
     options: {},
   });
+
 }
 
 fetchinguserdata();
